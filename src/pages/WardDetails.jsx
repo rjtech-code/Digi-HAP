@@ -2,13 +2,14 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Thermometer, Droplets, Wind, Clock, AlertTriangle, Shield, Heart, Phone, MapPin, Users, ChevronLeft, ChevronRight, Cloud } from 'lucide-react';
 import { wards } from '../data/wards';
 import { useWeather } from '../context/WeatherContext';
+import { getTemperatureColor } from '../utils/temperatureUtils';
 
 const WardDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const currentWardId = parseInt(id);
   const ward = wards.find(w => w.wardId === currentWardId);
-  const { weatherData, loading, error } = useWeather();
+  const { loading, wardTemperatures } = useWeather();
 
   // Navigation handlers
   const goToPreviousWard = () => {
@@ -143,10 +144,10 @@ const WardDetails = () => {
               </div>
               {loading ? (
                 <p className="text-2xl font-bold text-gray-900">Loading...</p>
-              ) : error ? (
-                <p className="text-2xl font-bold text-gray-900">N/A</p>
               ) : (
-                <p className="text-2xl font-bold text-gray-900">{Math.round(weatherData?.current?.temp || 0)}°C</p>
+                <p className="text-2xl font-bold text-gray-900">
+                  {wardTemperatures[currentWardId] ? `${wardTemperatures[currentWardId]}°C` : 'N/A'}
+                </p>
               )}
             </div>
 
@@ -160,7 +161,7 @@ const WardDetails = () => {
               ) : error ? (
                 <p className="text-2xl font-bold text-gray-900">N/A</p>
               ) : (
-                <p className="text-2xl font-bold text-gray-900">{weatherData?.current?.humidity || 0}%</p>
+                <p className="text-2xl font-bold text-gray-900">{ward.humidity || 0}%</p>
               )}
             </div>
 
@@ -174,7 +175,7 @@ const WardDetails = () => {
               ) : error ? (
                 <p className="text-2xl font-bold text-gray-900">N/A</p>
               ) : (
-                <p className="text-2xl font-bold text-gray-900">{weatherData?.current?.wind_speed || 0} m/s</p>
+                <p className="text-2xl font-bold text-gray-900">{ward.windSpeed || 0} m/s</p>
               )}
             </div>
 
@@ -188,7 +189,7 @@ const WardDetails = () => {
               ) : error ? (
                 <p className="text-2xl font-bold text-gray-900">N/A</p>
               ) : (
-                <p className="text-2xl font-bold text-gray-900 capitalize">{weatherData?.current?.weather?.[0]?.description || 'Clear'}</p>
+                <p className="text-2xl font-bold text-gray-900 capitalize">{ward.weatherCondition || 'Clear'}</p>
               )}
             </div>
           </div>

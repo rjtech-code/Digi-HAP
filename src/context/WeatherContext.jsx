@@ -1,5 +1,7 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useMemo } from 'react';
 import { fetchWeatherByCoords } from '../services/weatherService';
+import { calculateWardTemperature } from '../utils/temperatureUtils';
+import { wards } from '../data/wards';
 
 const WeatherContext = createContext(null);
 
@@ -7,6 +9,7 @@ export const WeatherProvider = ({ children }) => {
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [wardTemperatures, setWardTemperatures] = useState({});
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -18,6 +21,22 @@ export const WeatherProvider = ({ children }) => {
         if (result.success) {
           setWeatherData(result.data);
           setError(null);
+          
+          // Calculate ward temperatures based on base temperature and risk scores
+          if (result.data && result.data.current && result.data.current.temp) {
+            const baseTemp = result.data.current.temp;
+            const calculatedTemps = {};
+            
+            wards.forEach(ward => {
+              calculatedTemps[ward.wardId] = calculateWardTemperature(
+                baseTemp,
+                ward.riskScore,
+                ward.wardId
+              );
+            });
+            
+            setWardTemperatures(calculatedTemps);
+          }
         } else {
           setError(result.error);
         }
@@ -35,10 +54,13 @@ export const WeatherProvider = ({ children }) => {
     weatherData,
     loading,
     error,
+    wardTemperatures,
     getWeatherForWard: (wardId) => {
       // Return the same weather data for all wards
-      // In a real app, you might want to fetch per ward
       return weatherData;
+    },
+    getWardTemperature: (wardId) => {
+      return wardTemperatures[wardId] || null;
     },
   };
 
