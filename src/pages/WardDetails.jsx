@@ -1,10 +1,25 @@
-import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Thermometer, Droplets, Wind, Clock, AlertTriangle, Shield, Heart, Phone, MapPin, Users } from 'lucide-react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { ArrowLeft, Thermometer, Droplets, Wind, Clock, AlertTriangle, Shield, Heart, Phone, MapPin, Users, ChevronLeft, ChevronRight } from 'lucide-react';
 import { wards } from '../data/wards';
 
 const WardDetails = () => {
   const { id } = useParams();
-  const ward = wards.find(w => w.wardId === parseInt(id));
+  const navigate = useNavigate();
+  const currentWardId = parseInt(id);
+  const ward = wards.find(w => w.wardId === currentWardId);
+
+  // Navigation handlers
+  const goToPreviousWard = () => {
+    if (currentWardId > 1) {
+      navigate(`/ward/${currentWardId - 1}`);
+    }
+  };
+
+  const goToNextWard = () => {
+    if (currentWardId < 60) {
+      navigate(`/ward/${currentWardId + 1}`);
+    }
+  };
 
   if (!ward) {
     return (
@@ -64,6 +79,37 @@ const WardDetails = () => {
           <ArrowLeft className="w-5 h-5" />
           <span className="font-medium">Back to Home</span>
         </Link>
+
+        {/* Ward Navigation */}
+        <div className="flex flex-col sm:flex-row gap-3 mb-6">
+          {/* Previous Ward Button */}
+          <button
+            onClick={goToPreviousWard}
+            disabled={currentWardId === 1}
+            className={`flex-1 inline-flex items-center justify-center space-x-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+              currentWardId === 1
+                ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:border-primary-500 hover:text-primary-600 shadow-sm hover:shadow-md'
+            }`}
+          >
+            <ChevronLeft className="w-5 h-5" />
+            <span>Previous Ward</span>
+          </button>
+
+          {/* Next Ward Button */}
+          <button
+            onClick={goToNextWard}
+            disabled={currentWardId === 60}
+            className={`flex-1 inline-flex items-center justify-center space-x-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+              currentWardId === 60
+                ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:border-primary-500 hover:text-primary-600 shadow-sm hover:shadow-md'
+            }`}
+          >
+            <span>Next Ward</span>
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
 
         {/* Header Section */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
