@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Thermometer, AlertTriangle, UserPlus, Snowflake } from 'lucide-react';
+import { Menu, X, Thermometer, AlertTriangle, UserPlus, Snowflake, Trees } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,6 +9,7 @@ const Navbar = () => {
   const navItems = [
     { path: '/', label: 'Home', icon: null },
     { path: '/ward-temperature', label: 'Ward Temperature', icon: Thermometer },
+    { path: '/public-facilities', label: 'Public Facilities', icon: Trees },
     { path: '/cooling-station', label: 'Cooling Station', icon: Snowflake },
     { path: '/about', label: 'About', icon: null },
     { path: '/contact', label: 'Contact', icon: null },

@@ -8,6 +8,10 @@ import HeatAlerts from './pages/HeatAlerts'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import CoolingStation from './pages/CoolingStation'
+import PublicFacilities from './pages/PublicFacilities'
+import Parks from './pages/Parks'
+import ParkDetails from './pages/ParkDetails'
+import PublicToilets from './pages/PublicToilets'
 
 function App() {
   return (
@@ -22,6 +26,10 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cooling-station" element={<CoolingStation />} />
+        <Route path="/public-facilities" element={<PublicFacilities />} />
+        <Route path="/public-facilities/parks" element={<Parks />} />
+        <Route path="/public-facilities/parks/:id" element={<ParkDetails />} />
+        <Route path="/public-facilities/toilets" element={<PublicToilets />} />
       </Routes>
     </div>
   )
