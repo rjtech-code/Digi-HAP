@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Thermometer, AlertTriangle, UserPlus, Snowflake, Trees } from 'lucide-react';
+import { Menu, X, Thermometer, UserRound, Snowflake, Trees, House, Info, Mail } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { path: '/', label: 'Home', icon: null },
+    { path: '/', label: 'Home', icon: House },
     { path: '/ward-temperature', label: 'Ward Temperature', icon: Thermometer },
-    { path: '/public-facilities', label: 'Public Facilities', icon: Trees },
     { path: '/cooling-station', label: 'Cooling Station', icon: Snowflake },
-    { path: '/about', label: 'About', icon: null },
-    { path: '/contact', label: 'Contact', icon: null },
+    { path: '/public-facilities', label: 'Public Facilities', icon: Trees },
+    { path: '/about', label: 'About Us', icon: Info },
+    { path: '/contact', label: 'Contact Us', icon: Mail },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -65,7 +65,7 @@ const Navbar = () => {
                 to="/create-profile"
                 className="flex items-center space-x-2 bg-primary-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-primary-700 transition-all duration-200 shadow-sm hover:shadow-md"
               >
-                <UserPlus className="w-4 h-4" />
+                <UserRound className="w-4 h-4" />
                 <span>Create Profile</span>
               </NavLink>
             </div>
@@ -157,7 +157,7 @@ const Navbar = () => {
                     onClick={closeMenu}
                     className="flex items-center justify-center space-x-2 w-full bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition-all duration-200 shadow-sm hover:shadow-md"
                   >
-                    <UserPlus className="w-5 h-5" />
+                    <UserRound className="w-5 h-5" />
                     <span>Create Profile</span>
                   </NavLink>
                 </div>
