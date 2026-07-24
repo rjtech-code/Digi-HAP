@@ -1,12 +1,14 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Thermometer, Droplets, Wind, Clock, AlertTriangle, Shield, Heart, Phone, MapPin, Users, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Thermometer, Droplets, Wind, Clock, AlertTriangle, Shield, Heart, Phone, MapPin, Users, ChevronLeft, ChevronRight, Cloud } from 'lucide-react';
 import { wards } from '../data/wards';
+import { useWeather } from '../context/WeatherContext';
 
 const WardDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const currentWardId = parseInt(id);
   const ward = wards.find(w => w.wardId === currentWardId);
+  const { weatherData, loading, error } = useWeather();
 
   // Navigation handlers
   const goToPreviousWard = () => {
@@ -139,7 +141,13 @@ const WardDetails = () => {
                 <Thermometer className="w-5 h-5 text-primary-600" />
                 <span className="text-sm text-gray-600">Temperature</span>
               </div>
-              <p className="text-2xl font-bold text-gray-900">{ward.temperature}</p>
+              {loading ? (
+                <p className="text-2xl font-bold text-gray-900">Loading...</p>
+              ) : error ? (
+                <p className="text-2xl font-bold text-gray-900">N/A</p>
+              ) : (
+                <p className="text-2xl font-bold text-gray-900">{Math.round(weatherData?.current?.temp || 0)}°C</p>
+              )}
             </div>
 
             <div className="bg-gray-50 rounded-lg p-4">
@@ -147,7 +155,13 @@ const WardDetails = () => {
                 <Droplets className="w-5 h-5 text-blue-600" />
                 <span className="text-sm text-gray-600">Humidity</span>
               </div>
-              <p className="text-2xl font-bold text-gray-900">{ward.humidity}</p>
+              {loading ? (
+                <p className="text-2xl font-bold text-gray-900">Loading...</p>
+              ) : error ? (
+                <p className="text-2xl font-bold text-gray-900">N/A</p>
+              ) : (
+                <p className="text-2xl font-bold text-gray-900">{weatherData?.current?.humidity || 0}%</p>
+              )}
             </div>
 
             <div className="bg-gray-50 rounded-lg p-4">
@@ -155,23 +169,27 @@ const WardDetails = () => {
                 <Wind className="w-5 h-5 text-gray-600" />
                 <span className="text-sm text-gray-600">Wind Speed</span>
               </div>
-              <p className="text-2xl font-bold text-gray-900">{ward.windSpeed}</p>
+              {loading ? (
+                <p className="text-2xl font-bold text-gray-900">Loading...</p>
+              ) : error ? (
+                <p className="text-2xl font-bold text-gray-900">N/A</p>
+              ) : (
+                <p className="text-2xl font-bold text-gray-900">{weatherData?.current?.wind_speed || 0} m/s</p>
+              )}
             </div>
 
             <div className="bg-gray-50 rounded-lg p-4">
               <div className="flex items-center space-x-2 mb-2">
-                <Clock className="w-5 h-5 text-gray-500" />
-                <span className="text-sm text-gray-600">Last Updated</span>
+                <Cloud className="w-5 h-5 text-gray-500" />
+                <span className="text-sm text-gray-600">Condition</span>
               </div>
-              <p className="text-sm font-medium text-gray-900">
-                {new Date(ward.updatedAt).toLocaleString('en-IN', {
-                  day: '2-digit',
-                  month: 'short',
-                  year: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit'
-                })}
-              </p>
+              {loading ? (
+                <p className="text-2xl font-bold text-gray-900">Loading...</p>
+              ) : error ? (
+                <p className="text-2xl font-bold text-gray-900">N/A</p>
+              ) : (
+                <p className="text-2xl font-bold text-gray-900 capitalize">{weatherData?.current?.weather?.[0]?.description || 'Clear'}</p>
+              )}
             </div>
           </div>
         </div>

@@ -1,35 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Map, Cloud, Wind, Thermometer, Droplets } from 'lucide-react';
 import WardCard from '../components/WardCard';
 import { wards } from '../data/wards';
-import { fetchWeatherByCoords } from '../services/weatherService';
+import { useWeather } from '../context/WeatherContext';
 
 const WardTemperature = () => {
   const [isMapOpen, setIsMapOpen] = useState(false);
-  const [liveWeather, setLiveWeather] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  // Fetch live weather for Churu center
-  useEffect(() => {
-    const loadChuruWeather = async () => {
-      const result = await fetchWeatherByCoords(28.3000, 74.9600); // Churu center coordinates
-      
-      if (result.success) {
-        setLiveWeather(result.data);
-      }
-      setLoading(false);
-    };
-
-    loadChuruWeather();
-  }, []);
+  const { weatherData, loading, error } = useWeather();
 
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto">
         {/* Live Weather Summary Banner */}
-        {!loading && liveWeather && (
-          <div className="mb-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-xl p-6 border border-blue-200">
+        {!loading && weatherData && !error && (
+          <div className="mb-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-xl mt-6 p-6 border border-blue-200">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
                 <h2 className="text-xl font-bold text-gray-900 mb-1">Live Weather - Churu District</h2>
@@ -41,7 +26,7 @@ const WardTemperature = () => {
                   <Thermometer className="w-5 h-5 text-red-600" />
                   <div>
                     <p className="text-xs text-gray-600">Temperature</p>
-                    <p className="text-lg font-bold text-gray-900">{Math.round(liveWeather.current.temp)}°C</p>
+                    <p className="text-lg font-bold text-gray-900">{Math.round(weatherData.current.temp)}°C</p>
                   </div>
                 </div>
 
@@ -49,7 +34,7 @@ const WardTemperature = () => {
                   <Droplets className="w-5 h-5 text-blue-600" />
                   <div>
                     <p className="text-xs text-gray-600">Humidity</p>
-                    <p className="text-lg font-bold text-gray-900">{liveWeather.current.humidity}%</p>
+                    <p className="text-lg font-bold text-gray-900">{weatherData.current.humidity}%</p>
                   </div>
                 </div>
 
@@ -57,7 +42,7 @@ const WardTemperature = () => {
                   <Wind className="w-5 h-5 text-gray-600" />
                   <div>
                     <p className="text-xs text-gray-600">Wind Speed</p>
-                    <p className="text-lg font-bold text-gray-900">{liveWeather.current.wind_speed} m/s</p>
+                    <p className="text-lg font-bold text-gray-900">{weatherData.current.wind_speed} m/s</p>
                   </div>
                 </div>
 
@@ -65,7 +50,7 @@ const WardTemperature = () => {
                   <Cloud className="w-5 h-5 text-gray-600" />
                   <div>
                     <p className="text-xs text-gray-600">Condition</p>
-                    <p className="text-lg font-bold text-gray-900 capitalize">{liveWeather.current.weather[0]?.description || 'Clear'}</p>
+                    <p className="text-lg font-bold text-gray-900 capitalize">{weatherData.current.weather[0]?.description || 'Clear'}</p>
                   </div>
                 </div>
               </div>
