@@ -1,15 +1,87 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Map } from 'lucide-react';
+import { X, Map, Cloud, Wind, Thermometer, Droplets } from 'lucide-react';
 import WardCard from '../components/WardCard';
 import { wards } from '../data/wards';
+import { fetchWeatherByCoords } from '../services/weatherService';
 
 const WardTemperature = () => {
   const [isMapOpen, setIsMapOpen] = useState(false);
+  const [liveWeather, setLiveWeather] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch live weather for Churu center
+  useEffect(() => {
+    const loadChuruWeather = async () => {
+      const result = await fetchWeatherByCoords(28.3000, 74.9600); // Churu center coordinates
+      
+      if (result.success) {
+        setLiveWeather(result.data);
+      }
+      setLoading(false);
+    };
+
+    loadChuruWeather();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto">
+        {/* Live Weather Summary Banner */}
+        {!loading && liveWeather && (
+          <div className="mb-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-xl p-6 border border-blue-200">
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <h2 className="text-xl font-bold text-gray-900 mb-1">Live Weather - Churu District</h2>
+                <p className="text-sm text-gray-600">Real-time weather data from OpenWeatherMap</p>
+              </div>
+              
+              <div className="flex flex-wrap items-center gap-6">
+                <div className="flex items-center space-x-2">
+                  <Thermometer className="w-5 h-5 text-red-600" />
+                  <div>
+                    <p className="text-xs text-gray-600">Temperature</p>
+                    <p className="text-lg font-bold text-gray-900">{Math.round(liveWeather.current.temp)}°C</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  <Droplets className="w-5 h-5 text-blue-600" />
+                  <div>
+                    <p className="text-xs text-gray-600">Humidity</p>
+                    <p className="text-lg font-bold text-gray-900">{liveWeather.current.humidity}%</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  <Wind className="w-5 h-5 text-gray-600" />
+                  <div>
+                    <p className="text-xs text-gray-600">Wind Speed</p>
+                    <p className="text-lg font-bold text-gray-900">{liveWeather.current.wind_speed} m/s</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  <Cloud className="w-5 h-5 text-gray-600" />
+                  <div>
+                    <p className="text-xs text-gray-600">Condition</p>
+                    <p className="text-lg font-bold text-gray-900 capitalize">{liveWeather.current.weather[0]?.description || 'Clear'}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {loading && (
+          <div className="mb-6 bg-gray-50 rounded-xl p-6 border border-gray-200">
+            <div className="flex items-center justify-center">
+              <div className="w-5 h-5 border-2 border-primary-600 border-t-transparent rounded-full animate-spin"></div>
+              <span className="ml-3 text-sm text-gray-600">Loading live weather data...</span>
+            </div>
+          </div>
+        )}
+
         <div className="flex flex-col lg:flex-row">
           {/* Left Side - Sticky Map Panel (Desktop) */}
           <div className="hidden lg:block lg:w-[40%] lg:sticky lg:top-20 lg:h-[calc(100vh-5rem)] p-6">
