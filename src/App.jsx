@@ -6,6 +6,7 @@ import CreateProfile from './pages/CreateProfile'
 import HeatAlerts from './pages/HeatAlerts'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import CoolingStation from './pages/CoolingStation'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/alerts" element={<HeatAlerts />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/cooling-station" element={<CoolingStation />} />
       </Routes>
     </div>
   )
