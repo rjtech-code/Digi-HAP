@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 import { User, MapPin, PhoneCall, HeartPulse, FileText, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 const CreateProfile = () => {
@@ -109,7 +110,7 @@ const CreateProfile = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validateForm()) {
@@ -118,17 +119,30 @@ const CreateProfile = () => {
 
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
-      console.log('Profile Created:', formData);
+    try {
+      const response = await axios.post('http://localhost:5000/api/profile', {
+        ...formData,
+        age: parseInt(formData.age),
+        declaration: true,
+      });
+
+      console.log('Profile Created:', response.data);
       setIsSubmitting(false);
       setShowSuccess(true);
+      handleReset();
 
       // Hide success message after 5 seconds
       setTimeout(() => {
         setShowSuccess(false);
       }, 5000);
-    }, 1000);
+    } catch (error) {
+      setIsSubmitting(false);
+      console.error('Error creating profile:', error);
+      
+      // Show error message
+      const errorMessage = error.response?.data?.message || 'Failed to create profile. Please try again.';
+      alert(errorMessage);
+    }
   };
 
   const handleReset = () => {
