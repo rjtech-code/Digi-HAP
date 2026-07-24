@@ -8,8 +8,7 @@ const Navbar = () => {
 
   const navItems = [
     { path: '/', label: 'Home', icon: null },
-    { path: '/ward/1', label: 'Ward Temperature', icon: Thermometer },
-    { path: '/alerts', label: 'Heat Alerts', icon: AlertTriangle },
+    { path: '/ward-temperature', label: 'Ward Temperature', icon: Thermometer },
     { path: '/cooling-station', label: 'Cooling Station', icon: Snowflake },
     { path: '/about', label: 'About', icon: null },
     { path: '/contact', label: 'Contact', icon: null },
@@ -62,7 +61,7 @@ const Navbar = () => {
             {/* Right Section - Create Profile Button */}
             <div className="hidden lg:flex items-center">
               <NavLink
-                to="/profile"
+                to="/create-profile"
                 className="flex items-center space-x-2 bg-primary-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-primary-700 transition-all duration-200 shadow-sm hover:shadow-md"
               >
                 <UserPlus className="w-4 h-4" />
@@ -153,7 +152,7 @@ const Navbar = () => {
                 {/* Drawer Footer - Create Profile Button */}
                 <div className="p-6 border-t border-gray-200">
                   <NavLink
-                    to="/profile"
+                    to="/create-profile"
                     onClick={closeMenu}
                     className="flex items-center justify-center space-x-2 w-full bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition-all duration-200 shadow-sm hover:shadow-md"
                   >

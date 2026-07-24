@@ -1,119 +1,184 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, Map } from 'lucide-react';
-import WardCard from '../components/WardCard';
-import { wards } from '../data/wards';
+import { Link } from 'react-router-dom';
+import { Thermometer, MapPin, Shield, Users, Droplets, Heart, Sun, Wind } from 'lucide-react';
 
 const Home = () => {
-  const [isMapOpen, setIsMapOpen] = useState(false);
+  const heatSafetyTips = [
+    { icon: Droplets, title: 'Stay Hydrated', description: 'Drink plenty of water throughout the day' },
+    { icon: Sun, title: 'Avoid Peak Sun Hours', description: 'Limit outdoor activities between 11 AM and 4 PM' },
+    { icon: Wind, title: 'Wear Light Clothing', description: 'Choose loose, light-colored, breathable fabrics' },
+    { icon: Shield, title: 'Use Shade', description: 'Stay in shaded areas when outdoors' },
+    { icon: Heart, title: 'Watch for Heat Stroke Symptoms', description: 'Monitor for dizziness, nausea, and confusion' },
+    { icon: MapPin, title: 'Emergency Helpline', description: 'Call 108 for medical emergencies' },
+  ];
+
+  const quickStats = [
+    { value: '60', label: 'Wards Monitored' },
+    { value: '1', label: 'Cooling Station' },
+    { value: '24×7', label: 'Heat Awareness' },
+    { value: '100%', label: 'Community Safety' },
+  ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col lg:flex-row">
-          {/* Left Side - Sticky Map Panel (Desktop) */}
-          <div className="hidden lg:block lg:w-[40%] lg:sticky lg:top-20 lg:h-[calc(100vh-5rem)] p-6">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 h-full flex flex-col">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                Churu District Map
-              </h2>
-              <div className="flex-1 rounded-lg overflow-hidden">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28104.128043320507!2d74.94619817874212!3d28.297839291455283!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39136200b18a66a3%3A0x3e487bf6934c8306!2sChuru%2C%20Rajasthan%20331001!5e0!3m2!1sen!2sin!4v1784874954879!5m2!1sen!2sin"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  title="Churu District Map"
-                />
-              </div>
-            </div>
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-green-50 to-blue-50 py-20 px-4">
+        <div className="max-w-7xl mx-auto text-center">
+          <h1 className="text-6xl font-bold text-gray-900 mb-4">DigiHAP</h1>
+          <p className="text-2xl text-gray-700 mb-6">Digital Heat Action Platform</p>
+          <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+            DigiHAP helps citizens monitor heat conditions, understand heat risks, locate Cooling Stations, and stay protected during extreme weather events. Our platform is designed to enhance heat resilience and ensure public safety in Churu.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              to="/ward-temperature"
+              className="flex items-center space-x-2 bg-primary-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-primary-700 transition-all duration-200 shadow-sm hover:shadow-md"
+            >
+              <Thermometer className="w-5 h-5" />
+              <span>View Temperatures</span>
+            </Link>
+            <Link
+              to="/cooling-station"
+              className="flex items-center space-x-2 bg-white text-primary-600 border-2 border-primary-600 px-8 py-3 rounded-lg font-medium hover:bg-primary-50 transition-all duration-200"
+            >
+              <MapPin className="w-5 h-5" />
+              <span>Cooling Station</span>
+            </Link>
           </div>
+        </div>
+      </section>
 
-          {/* Right Side - Ward Cards Grid */}
-          <div className="flex-1 p-6 lg:w-[70%]">
-            <div className="mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">
-                Ward Temperature Status
-              </h2>
-              <p className="text-gray-600 mt-1">
-                Real-time temperature monitoring across all wards
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-              {wards.map((ward) => (
-                <WardCard key={ward.wardId} ward={ward} />
-              ))}
+      {/* About DigiHAP */}
+      <section className="py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-gray-900 mb-8 text-center">About DigiHAP</h2>
+          <div className="max-w-4xl mx-auto">
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              DigiHAP is a comprehensive digital platform designed to combat extreme heat and build climate resilience in Churu, Rajasthan. Our mission is to provide real-time heat monitoring, public awareness, and accessible cooling solutions to protect citizens during extreme weather events.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-green-50 rounded-xl p-6 border border-green-200">
+                <Shield className="w-8 h-8 text-green-600 mb-3" />
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Heat Resilience</h3>
+                <p className="text-gray-700">Building community capacity to adapt and respond to extreme heat conditions.</p>
+              </div>
+              <div className="bg-blue-50 rounded-xl p-6 border border-blue-200">
+                <Users className="w-8 h-8 text-blue-600 mb-3" />
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Public Awareness</h3>
+                <p className="text-gray-700">Educating citizens about heat risks, prevention, and safety measures.</p>
+              </div>
+              <div className="bg-purple-50 rounded-xl p-6 border border-purple-200">
+                <Heart className="w-8 h-8 text-purple-600 mb-3" />
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Citizen Safety</h3>
+                <p className="text-gray-700">Ensuring the safety and well-being of all residents during heat waves.</p>
+              </div>
+              <div className="bg-orange-50 rounded-xl p-6 border border-orange-200">
+                <MapPin className="w-8 h-8 text-orange-600 mb-3" />
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Smart City Initiative</h3>
+                <p className="text-gray-700">Leveraging technology for sustainable urban climate action and resilience.</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Mobile Floating Map Button */}
-      <button
-        onClick={() => setIsMapOpen(true)}
-        className="lg:hidden fixed bottom-6 right-6 z-40 bg-primary-600 text-white p-4 rounded-full shadow-lg hover:bg-primary-700 transition-all duration-200 hover:shadow-xl"
-        aria-label="Open map"
-      >
-        <Map className="w-6 h-6" />
-      </button>
+      {/* Ward Temperature Overview */}
+      <section className="py-16 px-4 bg-gray-50">
+        <div className="max-w-7xl mx-auto text-center">
+          <h2 className="text-4xl font-bold text-gray-900 mb-6">Ward Temperature Monitoring</h2>
+          <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-8">
+            Monitor heat conditions across all 60 wards of Churu in real-time. Access detailed temperature data, risk scores, and heat indices to stay informed about local conditions.
+          </p>
+          <Link
+            to="/ward-temperature"
+            className="inline-flex items-center space-x-2 bg-primary-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-primary-700 transition-all duration-200 shadow-sm hover:shadow-md"
+          >
+            <Thermometer className="w-5 h-5" />
+            <span>View All Wards</span>
+          </Link>
+        </div>
+      </section>
 
-      {/* Mobile Map Modal */}
-      <AnimatePresence>
-        {isMapOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black bg-opacity-50 z-50 lg:hidden"
-              onClick={() => setIsMapOpen(false)}
-            />
-
-            {/* Modal */}
-            <motion.div
-              initial={{ y: '100%' }}
-              animate={{ y: 0 }}
-              exit={{ y: '100%' }}
-              transition={{ type: 'tween', duration: 0.3 }}
-              className="fixed inset-x-0 bottom-0 top-10 bg-white rounded-t-2xl shadow-2xl z-50 lg:hidden flex flex-col"
-            >
-              {/* Modal Header */}
-              <div className="flex items-center justify-between p-6 border-b border-gray-200">
-                <h2 className="text-xl font-semibold text-gray-900">
-                  Churu District Map
-                </h2>
-                <button
-                  onClick={() => setIsMapOpen(false)}
-                  className="p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors duration-200"
-                  aria-label="Close map"
-                >
-                  <X className="w-5 h-5" />
-                </button>
+      {/* Cooling Station Overview */}
+      <section className="py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl font-bold text-gray-900 mb-6 text-center">Cooling Station</h2>
+            <p className="text-lg text-gray-700 leading-relaxed mb-8 text-center">
+              Visit Churu's Net-Zero Cooling Station at Collectorate Circle for relief during extreme heat. The station provides essential services including drinking water, shaded resting areas, first aid support, and a safe shelter during heatwaves.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100 text-center">
+                <Droplets className="w-10 h-10 text-blue-600 mx-auto mb-3" />
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Drinking Water</h3>
               </div>
-
-              {/* Map Content */}
-              <div className="flex-1 p-4">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28104.128043320507!2d74.94619817874212!3d28.297839291455283!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39136200b18a66a3%3A0x3e487bf6934c8306!2sChuru%2C%20Rajasthan%20331001!5e0!3m2!1sen!2sin!4v1784874954879!5m2!1sen!2sin"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  title="Churu District Map"
-                />
+              <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100 text-center">
+                <Shield className="w-10 h-10 text-green-600 mx-auto mb-3" />
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Resting Area</h3>
               </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+              <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100 text-center">
+                <Heart className="w-10 h-10 text-red-600 mx-auto mb-3" />
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">First Aid</h3>
+              </div>
+              <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100 text-center">
+                <MapPin className="w-10 h-10 text-purple-600 mx-auto mb-3" />
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Climate Resilience</h3>
+              </div>
+            </div>
+            <div className="text-center">
+              <Link
+                to="/cooling-station"
+                className="inline-flex items-center space-x-2 bg-green-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-green-700 transition-all duration-200 shadow-sm hover:shadow-md"
+              >
+                <MapPin className="w-5 h-5" />
+                <span>Explore Cooling Station</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Heat Safety Tips */}
+      <section className="py-16 px-4 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Heat Safety Tips</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {heatSafetyTips.map((tip, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-shadow duration-200"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                    <tip.icon className="w-6 h-6 text-orange-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">{tip.title}</h3>
+                    <p className="text-gray-600 text-sm leading-relaxed">{tip.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Quick Statistics */}
+      <section className="py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Quick Statistics</h2>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {quickStats.map((stat, index) => (
+              <div
+                key={index}
+                className="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl shadow-md p-8 border border-green-200 text-center"
+              >
+                <p className="text-4xl font-bold text-gray-900 mb-2">{stat.value}</p>
+                <p className="text-gray-700 font-medium">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

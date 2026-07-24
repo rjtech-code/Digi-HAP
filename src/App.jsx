@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
+import WardTemperature from './pages/WardTemperature'
 import WardDetails from './pages/WardDetails'
 import CreateProfile from './pages/CreateProfile'
 import HeatAlerts from './pages/HeatAlerts'
@@ -14,8 +15,9 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/ward-temperature" element={<WardTemperature />} />
         <Route path="/ward/:id" element={<WardDetails />} />
-        <Route path="/profile" element={<CreateProfile />} />
+        <Route path="/create-profile" element={<CreateProfile />} />
         <Route path="/alerts" element={<HeatAlerts />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
