@@ -51,30 +51,50 @@ const Home = () => {
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-gray-900 mb-8 text-center">About DigiHAP</h2>
-          <div className="max-w-4xl mx-auto">
-            <p className="text-lg text-gray-700 leading-relaxed mb-6">
-              DigiHAP is a comprehensive digital platform designed to combat extreme heat and build climate resilience in Churu, Rajasthan. Our mission is to provide real-time heat monitoring, public awareness, and accessible cooling solutions to protect citizens during extreme weather events.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-green-50 rounded-xl p-6 border border-green-200">
-                <Shield className="w-8 h-8 text-green-600 mb-3" />
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">Heat Resilience</h3>
-                <p className="text-gray-700">Building community capacity to adapt and respond to extreme heat conditions.</p>
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+            {/* Image Column - 45% width (2/5) */}
+            <div className="lg:col-span-2">
+              <div className="relative overflow-hidden rounded-2xl shadow-lg group cursor-pointer">
+                <img
+                  src="/Images/Image 2.jpeg"
+                  alt="District Magistrate, Churu - Leading the Heat Action Plan initiative"
+                  loading="lazy"
+                  className="w-full h-[400px] object-cover transition-transform duration-500 group-hover:scale-105"
+                />
               </div>
-              <div className="bg-blue-50 rounded-xl p-6 border border-blue-200">
-                <Users className="w-8 h-8 text-blue-600 mb-3" />
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">Public Awareness</h3>
-                <p className="text-gray-700">Educating citizens about heat risks, prevention, and safety measures.</p>
+              {/* Caption */}
+              <div className="mt-4 text-center">
+                <p className="text-lg font-semibold text-gray-900">District Magistrate, Churu</p>
+                <p className="text-sm text-gray-600 mt-1">Leading the Heat Action Plan initiative for a climate-resilient Churu.</p>
               </div>
-              <div className="bg-purple-50 rounded-xl p-6 border border-purple-200">
-                <Heart className="w-8 h-8 text-purple-600 mb-3" />
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">Citizen Safety</h3>
-                <p className="text-gray-700">Ensuring the safety and well-being of all residents during heat waves.</p>
-              </div>
-              <div className="bg-orange-50 rounded-xl p-6 border border-orange-200">
-                <MapPin className="w-8 h-8 text-orange-600 mb-3" />
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">Smart City Initiative</h3>
-                <p className="text-gray-700">Leveraging technology for sustainable urban climate action and resilience.</p>
+            </div>
+
+            {/* Content Column - 55% width (3/5) */}
+            <div className="lg:col-span-3">
+              <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                DigiHAP is a comprehensive digital platform designed to combat extreme heat and build climate resilience in Churu, Rajasthan. Our mission is to provide real-time heat monitoring, public awareness, and accessible cooling solutions to protect citizens during extreme weather events.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="bg-green-50 rounded-xl p-6 border border-green-200">
+                  <Shield className="w-8 h-8 text-green-600 mb-3" />
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Heat Resilience</h3>
+                  <p className="text-gray-700">Building community capacity to adapt and respond to extreme heat conditions.</p>
+                </div>
+                <div className="bg-blue-50 rounded-xl p-6 border border-blue-200">
+                  <Users className="w-8 h-8 text-blue-600 mb-3" />
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Public Awareness</h3>
+                  <p className="text-gray-700">Educating citizens about heat risks, prevention, and safety measures.</p>
+                </div>
+                <div className="bg-purple-50 rounded-xl p-6 border border-purple-200">
+                  <Heart className="w-8 h-8 text-purple-600 mb-3" />
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Citizen Safety</h3>
+                  <p className="text-gray-700">Ensuring the safety and well-being of all residents during heat waves.</p>
+                </div>
+                <div className="bg-orange-50 rounded-xl p-6 border border-orange-200">
+                  <MapPin className="w-8 h-8 text-orange-600 mb-3" />
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Smart City Initiative</h3>
+                  <p className="text-gray-700">Leveraging technology for sustainable urban climate action and resilience.</p>
+                </div>
               </div>
             </div>
           </div>

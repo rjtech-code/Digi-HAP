@@ -8,6 +8,7 @@ const Footer = () => {
     { path: '/cooling-station', label: 'Cooling Station' },
     { path: '/public-facilities', label: 'Public Facilities' },
     { path: '/create-profile', label: 'Create Profile' },
+    { path: '/developers', label: 'Developers' },
   ];
 
   const emergencyContacts = [

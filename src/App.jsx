@@ -16,6 +16,7 @@ import Parks from './pages/Parks'
 import ParkDetails from './pages/ParkDetails'
 import PublicToilets from './pages/PublicToilets'
 import ToiletDetails from './pages/ToiletDetails'
+import Developers from './pages/Developers'
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             <Route path="/public-facilities/parks/:id" element={<ParkDetails />} />
             <Route path="/public-facilities/toilets" element={<PublicToilets />} />
             <Route path="/public-facilities/toilets/:id" element={<ToiletDetails />} />
+            <Route path="/developers" element={<Developers />} />
           </Routes>
         </div>
         <Footer />
