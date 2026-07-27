@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { MapPin, Navigation } from 'lucide-react';
+import { useParams, Link } from 'react-router-dom';
+import { MapPin, Navigation, ArrowLeft } from 'lucide-react';
 import { toilets, calculateDistance } from '../data/toilets';
 
 const ToiletDetails = () => {
@@ -57,6 +57,17 @@ const ToiletDetails = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4">
       <div className="max-w-7xl mx-auto">
+        {/* Back Button */}
+        <div className="mb-6">
+          <Link
+            to="/public-facilities/toilets"
+            className="inline-flex items-center space-x-2 text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            <span>Back</span>
+          </Link>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left Column - Information */}
           <div className="space-y-6">
@@ -73,6 +84,14 @@ const ToiletDetails = () => {
                     <p className="text-2xl font-bold text-gray-900">
                       {distance !== null ? `${distance.toFixed(1)} km` : 'Distance unavailable'}
                     </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-3">
+                  <MapPin className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
+                  <div>
+                    <p className="text-sm text-gray-600">Latitude</p>
+                    <p className="text-lg font-semibold text-gray-900">{toilet.description}</p>
                   </div>
                 </div>
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Navigation } from 'lucide-react';
+import { MapPin, Navigation, ArrowLeft } from 'lucide-react';
 import { parks, calculateDistance } from '../data/parks';
 
 const Parks = () => {
@@ -77,6 +77,17 @@ const Parks = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4">
       <div className="max-w-7xl mx-auto">
+        {/* Back Button */}
+        <div className="mb-6">
+          <Link
+            to="/public-facilities"
+            className="inline-flex items-center space-x-2 text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            <span>Back</span>
+          </Link>
+        </div>
+
         {/* Page Header */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-gray-900 mb-4">Parks</h1>
