@@ -18,6 +18,7 @@ import {
   Users,
 } from 'lucide-react';
 import apiClient from '../services/apiClient';
+import { sendHealthAlertEmail } from '../services/emailAlertService';
 
 const PROFILE_STORAGE_KEY = 'digihapProfileId';
 
@@ -195,6 +196,27 @@ const CreateProfile = () => {
         age: parseInt(formData.age),
         declaration: true,
       });
+
+      try {
+        const emailResponse = await sendHealthAlertEmail(formData, formData.medicalConditions);
+        const emailLogData = {
+          formData,
+          selectedConditions: formData.medicalConditions,
+          emailResponse,
+        };
+
+        if (emailResponse.skipped) {
+          console.log('Health alert email skipped:', emailLogData);
+        } else {
+          console.log('Health alert email success:', emailLogData);
+        }
+      } catch (emailError) {
+        console.error('Health alert email failed:', {
+          error: emailError,
+          formData,
+          selectedConditions: formData.medicalConditions,
+        });
+      }
 
       console.log('Profile Created:', response.data);
       setIsSubmitting(false);
