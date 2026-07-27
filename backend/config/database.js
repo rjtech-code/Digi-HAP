@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const connectDB = async () => {
   try {
     console.log('Attempting to connect to MongoDB...');
-    console.log('Connection String:', process.env.MONGODB_URI.replace(/\/\/.*@/, '//***@')); // Hide credentials in log
+    console.log('Connection String:', process.env.MONGO_URI.replace(/\/\/.*@/, '//***@')); // Hide credentials in log
     
-    const conn = await mongoose.connect(process.env.MONGODB_URI, {
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
       serverSelectionTimeoutMS: 10000, // 10 seconds timeout
       socketTimeoutMS: 45000, // 45 seconds timeout
     });

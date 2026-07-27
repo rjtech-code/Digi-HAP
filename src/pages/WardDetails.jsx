@@ -9,7 +9,7 @@ const WardDetails = () => {
   const navigate = useNavigate();
   const currentWardId = parseInt(id);
   const ward = wards.find(w => w.wardId === currentWardId);
-  const { loading, wardTemperatures } = useWeather();
+  const { loading, error, wardTemperatures } = useWeather();
 
   // Navigation handlers
   const goToPreviousWard = () => {

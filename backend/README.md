@@ -44,7 +44,7 @@ npm install
 ```env
 PORT=5000
 NODE_ENV=development
-MONGODB_URI=mongodb://localhost:27017/digihap
+MONGO_URI=mongodb+srv://rjtechtop5_db_user:<db_password>@cluster0.mtnfezb.mongodb.net/
 CORS_ORIGIN=http://localhost:5173
 ```
 

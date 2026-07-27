@@ -19,12 +19,12 @@ require('dotenv').config();
 // Add this verification
 console.log('Environment Variables Loaded:');
 console.log('PORT:', process.env.PORT);
-console.log('MONGODB_URI:', process.env.MONGODB_URI ? '✅ Loaded' : '❌ Not Found');
+console.log('MONGO_URI:', process.env.MONGO_URI ? '✅ Loaded' : '❌ Not Found');
 console.log('CORS_ORIGIN:', process.env.CORS_ORIGIN);
 ```
 
 **What to check:**
-- If MONGODB_URI shows "Not Found", your .env file is not being loaded
+- If MONGO_URI shows "Not Found", your .env file is not being loaded
 - Ensure `.env` is in the `backend/` directory (not root)
 - Ensure there's no `.env.example` or `.env.sample` being used instead
 
@@ -39,13 +39,13 @@ mongodb+srv://<username>:<password>@<cluster-url>/<database-name>?retryWrites=tr
 
 **Your Current String:**
 ```
-mongodb+srv://rjtechtop5_db_user:KROLdnFlwYSFZt2H@cluster0.zdwqrln.mongodb.net/digihap?retryWrites=true&w=majority
+mongodb+srv://rjtechtop5_db_user:<db_password>@cluster0.mtnfezb.mongodb.net/
 ```
 
 **Checklist:**
 - ✅ Username: `rjtechtop5_db_user`
 - ✅ Password: `KROLdnFlwYSFZt2H`
-- ✅ Cluster URL: `cluster0.zdwqrln.mongodb.net`
+- ✅ Cluster URL: `cluster0.mtnfezb.mongodb.net`
 - ✅ Database Name: `digihap`
 - ✅ Parameters: `retryWrites=true&w=majority`
 
@@ -148,13 +148,13 @@ Run these commands in your terminal:
 
 ```bash
 # Test DNS resolution
-nslookup cluster0.zdwqrln.mongodb.net
+nslookup cluster0.mtnfezb.mongodb.net
 
 # Test connectivity to MongoDB Atlas
-telnet cluster0.zdwqrln.mongodb.net 27017
+telnet cluster0.mtnfezb.mongodb.net 27017
 
 # Or using PowerShell
-Test-NetConnection cluster0.zdwqrln.mongodb.net -Port 27017
+Test-NetConnection cluster0.mtnfezb.mongodb.net -Port 27017
 ```
 
 **Expected Results:**
@@ -204,7 +204,7 @@ npm -v
 
 1. **Download MongoDB Compass** (https://www.mongodb.com/try/download/compass)
 2. **Create new connection with:**
-   - **Hostname:** `cluster0.zdwqrln.mongodb.net`
+   - **Hostname:** `cluster0.mtnfezb.mongodb.net`
    - **Port:** `27017`
    - **Username:** `rjtechtop5_db_user`
    - **Password:** `KROLdnFlwYSFZt2H`
@@ -234,7 +234,7 @@ npm run dev
 **Look for these logs:**
 ```
 Attempting to connect to MongoDB...
-Connection String: mongodb+srv://***@cluster0.zdwqrln.mongodb.net/digihap?retryWrites=true&w=majority
+Connection String: mongodb+srv://***@cluster0.mtnfezb.mongodb.net/
 ```
 
 **If connection fails, you'll now see:**
@@ -310,9 +310,9 @@ const mongoose = require('mongoose');
 async function testConnection() {
   try {
     console.log('Testing MongoDB Atlas Connection...');
-    console.log('URI:', process.env.MONGODB_URI.replace(/\/\/.*@/, '//***@'));
+console.log('URI:', process.env.MONGO_URI.replace(/\/\/.*@/, '//***@'));
     
-    await mongoose.connect(process.env.MONGODB_URI, {
+    await mongoose.connect(process.env.MONGO_URI, {
       serverSelectionTimeoutMS: 5000,
     });
     
@@ -358,7 +358,7 @@ If the issue persists, please provide:
    - Region where cluster is hosted
 4. **Result of DNS test:**
    ```bash
-   nslookup cluster0.zdwqrln.mongodb.net
+   nslookup cluster0.mtnfezb.mongodb.net
    ```
 
 ---
