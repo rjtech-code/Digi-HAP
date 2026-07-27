@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Thermometer, Droplets, Heart, Shield, Users, UserPlus, Baby, Briefcase, Home, MapPin, ExternalLink, Wind, Sun, Wind as WindIcon, Crosshair, Waves, Navigation } from 'lucide-react';
+import ImageGallery from '../components/ImageGallery';
 
 const CoolingStation = () => {
   const [userLocation, setUserLocation] = useState(null);
@@ -207,6 +208,34 @@ const CoolingStation = () => {
             ))}
           </div>
         </section>
+
+        {/* Cooling Station Gallery */}
+        <ImageGallery
+          title="Cooling Station Gallery"
+          subtitle="Explore the Net-Zero Cooling Station at Collectorate Circle, Churu through real photographs showcasing its infrastructure and facilities."
+          images={[
+            {
+              src: '/Images/Image 1.png',
+              alt: 'Exterior view of the Net-Zero Cooling Station at Collectorate Circle, Churu',
+              caption: 'Exterior View of Cooling Station'
+            },
+            {
+              src: '/Images/Image 2.jpeg',
+              alt: 'Visitor resting area with comfortable seating in the cooling station',
+              caption: 'Visitor Resting Area'
+            },
+            {
+              src: '/Images/Image 3.jpeg',
+              alt: 'Solar powered cooling system with misting nozzles and fans',
+              caption: 'Solar Powered Cooling System'
+            },
+            {
+              src: '/Images/Image 4.jpeg',
+              alt: 'Public seating arrangement with drinking water facility',
+              caption: 'Public Seating & Drinking Water Facility'
+            }
+          ]}
+        />
 
         {/* Beneficiaries */}
         <section className="bg-gray-50 rounded-2xl p-8">
