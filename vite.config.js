@@ -6,7 +6,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': 'http://localhost:5000',
+      '/api': {
+        target: 'https://digi-hap.onrender.com',
+        changeOrigin: true,
+        secure: true,
+      },
     },
   },
 })

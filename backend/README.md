@@ -45,7 +45,7 @@ npm install
 PORT=5000
 NODE_ENV=development
 MONGO_URI=mongodb+srv://rjtechtop5_db_user:<db_password>@cluster0.mtnfezb.mongodb.net/
-CORS_ORIGIN=http://localhost:5173
+CORS_ORIGIN=http://localhost:5173,https://digihap.vercel.app
 ```
 
 3. Ensure MongoDB is running on your system
@@ -55,7 +55,7 @@ CORS_ORIGIN=http://localhost:5173
 npm run dev
 ```
 
-The server will start on `http://localhost:5000`
+The production API runs at `https://digi-hap.onrender.com`
 
 ## API Endpoints
 
