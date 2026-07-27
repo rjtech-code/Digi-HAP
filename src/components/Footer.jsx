@@ -82,22 +82,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Section 5: Project Information */}
-        <div className="mt-8 pt-8 border-t border-green-700">
-          <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-            <div className="text-center sm:text-left">
-              <p className="text-green-200 text-sm">
-                Made for <span className="font-semibold text-white">Churu Municipal Heat Action Platform</span>
-              </p>
-              <p className="text-green-300 text-sm mt-1">Churu, Rajasthan</p>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Heart className="w-4 h-4 text-red-400" />
-              <span className="text-green-200 text-sm">Built with care for citizen safety</span>
-            </div>
-          </div>
-        </div>
-
         {/* Bottom Bar */}
         <div className="mt-8 pt-6 border-t border-green-700">
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
