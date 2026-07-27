@@ -2,6 +2,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import { User, MapPin, PhoneCall, HeartPulse, FileText, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
+const API_BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+
 const CreateProfile = () => {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -120,7 +122,7 @@ const CreateProfile = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/profile`, {
+      const response = await axios.post(`${API_BASE_URL}/api/profile`, {
         ...formData,
         age: parseInt(formData.age),
         declaration: true,
