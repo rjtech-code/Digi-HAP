@@ -66,6 +66,7 @@ The production API runs at `https://digi-hap.onrender.com`
 - **POST** `/api/profile` - Create a new user profile
 - **GET** `/api/profile` - Get all profiles (Admin only - future use)
 - **GET** `/api/profile/:id` - Get profile by ID (future use)
+- **DELETE** `/api/profile/:id` - Delete profile by ID
 
 ## API Usage
 
