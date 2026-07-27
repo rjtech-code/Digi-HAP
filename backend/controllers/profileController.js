@@ -139,8 +139,37 @@ const getProfileById = async (req, res) => {
   }
 };
 
+// @desc    Delete profile by ID
+// @route   DELETE /api/profile/:id
+// @access  Public
+const deleteProfile = async (req, res) => {
+  try {
+    const profile = await UserProfile.findByIdAndDelete(req.params.id);
+
+    if (!profile) {
+      return res.status(404).json({
+        success: false,
+        message: 'Profile not found',
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Profile deleted successfully.',
+    });
+  } catch (error) {
+    console.error('Error deleting profile:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to delete profile.',
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createProfile,
   getAllProfiles,
   getProfileById,
+  deleteProfile,
 };
